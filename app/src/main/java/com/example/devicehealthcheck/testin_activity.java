@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,71 +50,6 @@ public class testin_activity extends AppCompatActivity {
             Button firstButton = view.findViewById(R.id.button3);
 
 
-            if (itemAtPos.getTitle().equals("Front Camera")) {
-                if (Camerachecker.isFrontCameraAvailable(view.getContext())) {
-                    firstButton.setText("Success");
-                } else {
-                    firstButton.setText("Failed");
-
-                }
-            } else if (itemAtPos.equals("Rear Camera")) {
-                if (Camerachecker.isRearCameraAvailable(view.getContext())) {
-                    firstButton.setText("Success");
-                } else {
-                    firstButton.setText("Failed");
-                }
-            } else if (itemAtPos.equals("Bluetooth")) {
-                boolean isBluetoothAvailable = Bluetooth.isBluetoothAvailable(view.getContext());
-                if (isBluetoothAvailable) {
-                    firstButton.setText("Success");
-                } else {
-                    firstButton.setText("Failed");
-                }
-            } else if (itemAtPos.equals("Microphone (Primary)")) {
-                boolean priMic = Microphone.isPrimaryMicrophoneAvailable(view.getContext());
-                if (priMic) {
-                    firstButton.setText("Success");
-                } else {
-                    firstButton.setText("Failed");
-                }
-            } else if (itemAtPos.equals("Microphone (Secondary)")) {
-                boolean secMic = Microphone.isSecondaryMicrophoneAvailable(view.getContext());
-                if (secMic) {
-                    firstButton.setText("Success");
-                } else {
-                    firstButton.setText("Failed");
-                }
-            } else if (itemAtPos.equals("Root Status")) {
-                RootChecker rootChecker = new RootChecker();
-                if (rootChecker.isRooted()) {
-                    firstButton.setText("Success");
-                } else {
-                    firstButton.setText("Failed");
-                }
-            } else if (itemAtPos.equals("Call Check")) {
-                Intent intent = new Intent(view.getContext(), VoiceCheckActivity.class);
-                view.getContext().startActivity(intent);
-            } else if (itemAtPos.equals("Accelerometer")) {
-                if (Accelerometer.isAccelerometerAvailable(view.getContext())) {
-                    firstButton.setText("Success");
-                } else {
-                    firstButton.setText("Failed");
-                }
-            } else if (itemAtPos.equals("GPS")) {
-                boolean isGPS = GPS.isGPSEnabled(view.getContext());
-                if (isGPS) {
-                    firstButton.setText("Success");
-                } else {
-                    firstButton.setText("Failed");
-                }
-            } else {
-                boolean isGyroscopeActive = Gyroscope.isGyroscopeAvailable(view.getContext());
-                if (isGyroscopeActive) {
-                    firstButton.setText("Success");
-                } else {
-                    firstButton.setText("Failed");
-                }
-            }
         });
 
 

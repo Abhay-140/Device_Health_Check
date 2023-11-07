@@ -46,12 +46,90 @@ public class CardAdapter extends BaseAdapter {
         TextView titleView = rowView.findViewById(R.id.textView4);
         ImageView img = rowView.findViewById(R.id.imageView3);
         TextView des = rowView.findViewById(R.id.textView3);
+        Button firstButton = rowView.findViewById(R.id.button3);
 
-        CardItem cardItem = data.get(position);
+        CardItem itemAtPos = data.get(position);
 
-        titleView.setText(cardItem.getTitle());
-        img.setImageResource(cardItem.getImageResource());
-        des.setText(cardItem.getDescription());
+        titleView.setText(itemAtPos.getTitle());
+        img.setImageResource(itemAtPos.getImageResource());
+        des.setText(itemAtPos.getDescription());
+
+        firstButton.setOnClickListener(v -> {
+            if (itemAtPos.getTitle().equals("Front Camera")) {
+                if (Camerachecker.isFrontCameraAvailable(v.getContext())) {
+                    firstButton.setText("Success");
+                } else {
+                    firstButton.setText("Failed");
+
+                }
+            }
+            else if (itemAtPos.getTitle().equals("Rear Camera")) {
+                if (Camerachecker.isRearCameraAvailable(v.getContext())) {
+                    firstButton.setText("Success");
+                } else {
+                    firstButton.setText("Failed");
+                }
+            }
+            else if (itemAtPos.getTitle().equals("Bluetooth")) {
+                boolean isBluetoothAvailable = Bluetooth.isBluetoothAvailable(v.getContext());
+                if (isBluetoothAvailable) {
+                    firstButton.setText("Success");
+                } else {
+                    firstButton.setText("Failed");
+                }
+            }
+            else if (itemAtPos.getTitle().equals("Microphone (Primary)")) {
+                boolean priMic = Microphone.isPrimaryMicrophoneAvailable(v.getContext());
+                if (priMic) {
+                    firstButton.setText("Success");
+                } else {
+                    firstButton.setText("Failed");
+                }
+            }
+            else if (itemAtPos.getTitle().equals("Microphone (Secondary)")) {
+                boolean secMic = Microphone.isSecondaryMicrophoneAvailable(v.getContext());
+                if (secMic) {
+                    firstButton.setText("Success");
+                } else {
+                    firstButton.setText("Failed");
+                }
+            }
+            else if (itemAtPos.getTitle().equals("Root Status")) {
+                RootChecker rootChecker = new RootChecker();
+                if (rootChecker.isRooted()) {
+                    firstButton.setText("Success");
+                } else {
+                    firstButton.setText("Failed");
+                }
+            }
+            else if (itemAtPos.getTitle().equals("Call Check")) {
+                Intent intent = new Intent(v.getContext(), VoiceCheckActivity.class);
+                v.getContext().startActivity(intent);
+            }
+            else if (itemAtPos.getTitle().equals("Accelerometer")) {
+                if (Accelerometer.isAccelerometerAvailable(v.getContext())) {
+                    firstButton.setText("Success");
+                } else {
+                    firstButton.setText("Failed");
+                }
+            }
+            else if (itemAtPos.getTitle().equals("GPS")) {
+                boolean isGPS = GPS.isGPSEnabled(v.getContext());
+                if (isGPS) {
+                    firstButton.setText("Success");
+                } else {
+                    firstButton.setText("Failed");
+                }
+            }
+            else {
+                boolean isGyroscopeActive = Gyroscope.isGyroscopeAvailable(v.getContext());
+                if (isGyroscopeActive) {
+                    firstButton.setText("Success");
+                } else {
+                    firstButton.setText("Failed");
+                }
+            }
+        });
 
         return rowView;
     }
